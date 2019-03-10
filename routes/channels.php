@@ -14,3 +14,12 @@
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+
+
+// Broadcast::channel('public',function($user,$survey_id){
+//     return [
+//         'id'    => $user->id,
+//         'image' =>  $user->image(),
+//         'full_name' => $user->full_name
+//     ];
+// });

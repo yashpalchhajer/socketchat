@@ -10,7 +10,24 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+use App\Message;
+use App\Events\MessagePushed;
 Route::get('/', function () {
     return view('welcome');
+});
+
+
+Route::get('/getAll',function(){
+    $message = Message::take(200)->pluck('content');
+    return $message;
+});
+
+Route::post('/post',function(){
+    $message = new Message();
+    $content = request('message');
+    $message->content= $content;
+    $message->save();
+
+    event(new MessagePushed($content));
+    return $message;
 });
